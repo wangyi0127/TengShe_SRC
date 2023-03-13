@@ -1,11 +1,12 @@
 from django.contrib import admin
 from srcmodel.models import *
+from srcmodel.forms import UserModelForm
  
 # Register your models here.
 
 class CompanyInformationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'company_name', 'company_title', 'company_introduction', 'logo', 'address', 'website') # list
-    fields = ('company_name', 'company_title', 'company_introduction', 'logo', 'address', 'website')
+    list_display = ('id', 'company_name', 'company_title', 'logo', 'address', 'website') # list
+    # fields = ('company_name', 'company_title', 'company_introduction', 'logo', 'address', 'website')
 
 class ProjectTypeAdmin(admin.ModelAdmin):
     list_display = ('id', 'type_name') # list
@@ -35,6 +36,18 @@ class ProjectAdmin(admin.ModelAdmin):
     # inlines = [CompanyInformationInline]  # Inline
     list_display = ('id', 'project_id', 'project_name', 'company_information', 'project_status') # list
 
+class ManageUserDetailAdmin(admin.ModelAdmin):
+    # inlines = [CompanyInformationInline]  # Inline
+    list_display = ('id', 'name', 'sex', 'birthday', 'entry_data', 'department') # list
+
+class UserAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('用户类型', {
+            'fields': ('username','email','usertype', ('user_detail'))
+        }),
+    )
+    form = UserModelForm
+
 
 admin.site.register(CompanyInformation, CompanyInformationAdmin)
 admin.site.register(ProjectType, ProjectTypeAdmin)
@@ -45,8 +58,10 @@ admin.site.register(RewardType, RewardTypeAdmin)
 admin.site.register(RewardLevel, RewardLevelAdmin)
 admin.site.register(ProjectStatus, ProjectStatusAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(ManageUserDetail, ManageUserDetailAdmin)
+admin.site.register(User,UserAdmin)
 
 
 
-admin.site.register([ManageUserDetail, UserDetail, User, 
+admin.site.register([UserDetail, Department,
     LeakRank, LeakInformation])
