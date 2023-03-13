@@ -21,9 +21,10 @@ class Project(models.Model):
 
 # 2公司信息表
 class CompanyInformation(models.Model): 
-    company_name = models.CharField(max_length=32) # 团队名称，
-    company_introduction = models.TextField() # 团队介绍，
-    logo = models.CharField(max_length=32) # logo，
+    company_name = models.CharField(max_length=32) # 公司名称，
+    company_title = models.CharField(max_length=64) # 公司简介，
+    company_introduction = models.TextField() # 公司描述，
+    logo = models.CharField(max_length=128) # logo，
     address = models.CharField(max_length=32) # 地址，
     website = models.URLField() # 网站链接，
 
@@ -49,21 +50,11 @@ class RewardType(models.Model):
 
 # 8奖励等级
 class RewardLevel(models.Model):
-    level_name = (
-        (0, "1级"),
-        (1, "2级"),
-        (2, "3级"),
-        (3, "4级"),
-        (4, "5级"),
-    )
+    level_name = models.CharField(max_length=16)
+
 # 9项目状态
 class ProjectStatus(models.Model):
-    type_name = (
-        (0, "待审核"),
-        (1, "未开始"),
-        (2, "进行中"),
-        (3, "已结束"),
-    )
+    type_name = models.CharField(max_length=16)
 
 # 漏洞信息表
 class LeakInformation(models.Model):
@@ -78,15 +69,11 @@ class LeakInformation(models.Model):
     leak_reward = models.IntegerField() # 漏洞奖励，保留字段
     create_data = models.DateField() # 创建时间，
     author = models.ForeignKey("User", on_delete=models.CASCADE) # 提交人，多对一
+    project = models.ForeignKey("Project", on_delete=models.CASCADE) # 提交人，多对一
 
 # 漏洞等级
 class LeakRank(models.Model):
-    level_name = (
-        (0, "紧急"),
-        (1, "高危"),
-        (2, "中危"),
-        (3, "低危"),
-    )
+    level_name = models.CharField(max_length=16)
 
 # 用户表
 class User(models.Model):
@@ -94,11 +81,7 @@ class User(models.Model):
     email = models.EmailField() # 邮箱，
     phone = models.CharField(max_length=32) # 联系电话，
     password = models.CharField(max_length=254) # 认证密码，
-    usertype = (
-        (0, "安全人员"),
-        (1, "企业用户"),
-        (2, "运营人员"),
-    ) # 用户类型
+    usertype = models.CharField(max_length=16) # 用户类型
     user_detail = models.OneToOneField("UserDetail", on_delete=models.CASCADE) # 测试用户信息关联
     company_information = models.OneToOneField("CompanyInformation", on_delete=models.CASCADE) # 企业用户信息关联
     create_name = models.OneToOneField("ManageUserDetail", on_delete=models.CASCADE) # 运营用户信息关联
@@ -106,11 +89,7 @@ class User(models.Model):
 # 运营用户信息表
 class ManageUserDetail(models.Model):
     name = models.CharField(max_length=32) # 姓名
-    sex = (
-        (0, "女"),
-        (1, "男"),
-        (2, "保密"),
-    )
+    sex = models.CharField(max_length=16)
     birthday = models.DateField() # 生日
     entry_data = models.DateField() # 入职时间
     department = models.ForeignKey("Department", on_delete=models.CASCADE) # 所属部门
@@ -123,11 +102,7 @@ class Department(models.Model):
 # 安全测试用户信息
 class UserDetail(models.Model):
     name = models.CharField(max_length=32) # 姓名
-    sex = (
-        (0, "女"),
-        (1, "男"),
-        (2, "保密"),
-    )
+    sex = models.CharField(max_length=16)
     birthday = models.DateField() # 生日
     diploma = models.CharField(max_length=32) # 学历
     occupation = models.CharField(max_length=32) # 职业
