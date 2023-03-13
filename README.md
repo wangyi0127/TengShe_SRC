@@ -3,6 +3,7 @@
 
 考虑再三，计划使用django借此机会学习和丰富一下python web相关技术能力。
 
+---------------------------------------
 安装迁移：
 python manage.py migrate   // 创建表结构
 
@@ -15,6 +16,35 @@ python manage.py runserver 0.0.0.0:8000
 
 创建管理用户：
 python manage.py createsuperuser
+
+-------------------------------------
+切换分支
+git checkout dev
+
+拉取：
+git pull origin dev
+
+提交:
+git checkout dev
+git pull：在提交代码之前需要先拉取代码
+git add .
+git add 文件名1 文件名2 …
+git commit -m ""
+git commit 文件名 -m “提交代码备注”
+
+git push origin dev
+
+合并代码
+git merge main
+
+检查一下是否合并成功，是否有冲突
+git status
+
+查看分支
+git branch
+git branch -a
+
+------------------------------------
 
 结构分析
 项目：
@@ -50,7 +80,6 @@ typename(现金，代金卷，积分)
 
 漏洞等级表：
 紧急，高危，中危，低危
-
 
 用户表：
 邮箱，电话，密码，用户名，创建时间，用户类型，测试用户信息，企业用户信息，运营用户信息
