@@ -12,7 +12,7 @@ python manage.py makemigrations srcmodel  // 让 Django 知道我们在我们的
 python manage.py migrate srcmodel   // 创建表结构
 
 运行：
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8100
 
 创建管理用户：
 python manage.py createsuperuser
@@ -76,7 +76,7 @@ typename(现金，代金卷，积分)
 待审核，未开始，进行中，已结束
 
 漏洞信息表：
-漏洞编号，漏洞名称，漏洞描述，影响范围，漏洞危害，漏洞等级，整改意见，漏洞状态，漏洞奖励，创建时间，提交人
+漏洞编号，漏洞名称，漏洞描述，影响范围，漏洞危害，漏洞等级，整改意见，漏洞状态，漏洞奖励，创建时间，提交人，所属项目
 
 漏洞等级表：
 紧急，高危，中危，低危
