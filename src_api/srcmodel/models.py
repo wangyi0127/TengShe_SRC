@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
  
@@ -133,16 +134,20 @@ class User(models.Model):
     username = models.CharField(max_length=32,verbose_name="用户名") # 用户名
     email = models.EmailField(verbose_name="邮箱") # 邮箱，
     phone = models.CharField(max_length=32,verbose_name="联系电话") # 联系电话，
-    password = models.CharField(max_length=254,verbose_name="认证密码") # 认证密码，
+    password = models.CharField(max_length=512,verbose_name="认证密码") # 认证密码，
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password, None, 'pbkdf2_sha256')
+        super(User, self).save(*args, **kwargs)
+
     CHOICES = (
         (0, "安全人员"),
         (1, "企业人员"),
         (2, "运营人员"),
     )
     usertype = models.SmallIntegerField(choices=CHOICES,verbose_name="用户类型") # 用户类型
-    user_detail = models.OneToOneField("UserDetail", on_delete=models.CASCADE,verbose_name="测试用户信息") # 测试用户信息关联，一对一
-    company_information = models.OneToOneField("CompanyInformation", on_delete=models.CASCADE,verbose_name="企业信息") # 企业用户信息关联，一对一
-    manage_userinfo = models.OneToOneField("ManageUserDetail", on_delete=models.CASCADE,verbose_name="运营用户信息") # 运营用户信息关联，一对一
+    user_detail = models.OneToOneField("UserDetail", on_delete=models.CASCADE, blank=True, null=True, verbose_name="测试用户信息") # 测试用户信息关联，一对一
+    company_information = models.OneToOneField("CompanyInformation", on_delete=models.CASCADE, blank=True, null=True, verbose_name="企业信息") # 企业用户信息关联，一对一
+    manage_userinfo = models.OneToOneField("ManageUserDetail", on_delete=models.CASCADE, blank=True, null=True, verbose_name="运营用户信息") # 运营用户信息关联，一对一
     class Meta:
         verbose_name_plural='用户表'
         verbose_name = '用户表'
