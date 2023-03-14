@@ -1,5 +1,6 @@
 window.addEventListener("load", function() {
     (function($) {
+        //用户添加用户类型字段隐藏显示
         var selectField = $('#id_usertype'),
         user_verified = $('.user_detailcls'),
         company_verified = $('.company_informationcls'),
@@ -22,5 +23,6 @@ window.addEventListener("load", function() {
                 manage_verified.show();
             }
         });
+
     })(django.jQuery);
 });

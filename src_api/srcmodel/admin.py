@@ -41,6 +41,7 @@ class ManageUserDetailAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'sex', 'birthday', 'entry_data', 'department') # list
 
 class UserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username', 'email', 'phone', 'usertype', 'company_information', 'manage_userinfo', 'user_detail') # list
     fieldsets = (
         (None, {
             'fields': ('username',)
