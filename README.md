@@ -19,7 +19,7 @@ python manage.py createsuperuser
 
 -------------------------------------
 切换分支
-git checkout dev
+git checkout main
 
 拉取：
 git pull origin dev
@@ -28,7 +28,7 @@ git pull origin dev
 git checkout dev
 git pull：在提交代码之前需要先拉取代码
 git add .
-git add 文件名1 文件名2 … 
+git add 文件名1 文件名2 …
 git commit -m ""
 git commit 文件名 -m “提交代码备注”
 
@@ -45,7 +45,6 @@ git branch
 git branch -a
 
 ------------------------------------
-
 结构分析
 项目：
 项目信息表：
