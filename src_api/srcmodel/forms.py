@@ -7,5 +7,5 @@ class UserModelForm(forms.ModelForm):
         model = User
         fields = ('usertype',)
         widgets = {
-            'usertype': forms.Select(choices=User.usertype_choices)
+            'usertype': forms.Select(choices=User.CHOICES)
         }

@@ -42,11 +42,42 @@ class ManageUserDetailAdmin(admin.ModelAdmin):
 
 class UserAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('用户类型', {
-            'fields': ('username','email','usertype', ('user_detail'))
+        (None, {
+            'fields': ('username',)
         }),
+        (None, {
+            'fields': ('email',)
+        }),
+        (None, {
+            'fields': ('phone',)
+        }),
+        (None, {
+            'fields': ('password',)
+        }),
+        (None, {
+            'fields': ('usertype',),
+            'classes': ('usertypecls',)
+        }),
+        (None, {
+            'fields': ('user_detail',),
+            'classes': ('user_detailcls',)
+        }),
+        (None, {
+            'fields': ('company_information',),
+            'classes': ('company_informationcls',)
+        }),
+        (None, {
+            'fields': ('manage_userinfo',),
+            'classes': ('manage_userinfocls',)
+        })
     )
     form = UserModelForm
+    class Media:
+    #     js = (
+    #     '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',  # jquery
+    #     'js/admin.js',       # project static folder
+    # )
+        js = ('js/base.js',)
 
 
 admin.site.register(CompanyInformation, CompanyInformationAdmin)
