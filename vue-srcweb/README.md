@@ -44,6 +44,14 @@ $ npm install
 $ npm run serve
 ```
 更多信息参考 [使用文档](https://iczer.gitee.io/vue-antd-admin-docs)
+```
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+$ cnpm install （或者cnpm i）
+$ npm install -g @vue/cli
+$ cnpm install node-sass@4.14.1
+$ npm install --global --production windows-build-tools
+$ cnpm run serve
+```
 
 ## 参与贡献
 我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :star2:：
