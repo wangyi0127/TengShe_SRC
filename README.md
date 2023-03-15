@@ -25,7 +25,7 @@ python manage.py createsuperuser
 git checkout main
 
 拉取：
-git pull origin dev
+git pull origin main
 
 提交:
 git checkout dev
@@ -35,7 +35,7 @@ git add 文件名1 文件名2 …
 git commit -m ""
 git commit 文件名 -m “提交代码备注”
 
-git push origin dev
+git push origin main
 
 合并代码
 git merge main
