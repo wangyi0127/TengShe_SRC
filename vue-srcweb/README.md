@@ -45,12 +45,14 @@ $ npm run serve
 ```
 更多信息参考 [使用文档](https://iczer.gitee.io/vue-antd-admin-docs)
 ```
-$ npm install -g cnpm --registry=https://registry.npm.taobao.org
-$ cnpm install （或者cnpm i）
-$ npm install -g @vue/cli
-$ cnpm install node-sass@4.14.1
-$ npm install --global --production windows-build-tools
-$ cnpm run serve
+环境部署参考：https://www.jb51.net/article/251371.htm
+环境：
+C:\Users\DELL>node -v
+v16.19.1
+C:\Users\DELL>npm -v
+8.19.3
+异常：npm ERR! Cannot read properties of null (reading 'pickAlgorithm')
+处理：npm cache clear --force
 ```
 
 ## 参与贡献
