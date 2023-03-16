@@ -2,29 +2,25 @@
 from django.http import HttpResponse
 from app_project.models import User,Project
 from django.contrib import auth
+from django.shortcuts import render
+from django.http import JsonResponse
  
 # login
 def Login(request):
     if request.method == "GET":
-        return render(request, "login.html")
+        return JsonResponse(
+            {'success': 'fail', 'msg': 'HTTP方法异常'},
+        )
+    request.session['CheckCode'] = '123456'
     username = request.POST.get("username")
     password = request.POST.get("pwd")
-    valid_num = request.POST.get("valid_num")
-    keep_str = request.session.get("keep_str")
-    if keep_str.upper() == valid_num.upper():
+    valid_num = request.POST.get("code")
+    CheckCode = request.session.get("CheckCode")
+    if CheckCode.upper() == valid_num.upper():
         user_obj = auth.authenticate(username=username, password=password)
-        print(user_obj.username)
-        if not user_obj:
-            return redirect("/login/")
-        else:
-
-            auth.login(request, user_obj)
-            path = request.GET.get("next") or "/index/"
-            print(path)
-            return redirect(path)
+        return HttpResponse(user_obj.username)
     else:
-        return redirect("/login/")
-    return HttpResponse("<p>login</p>")
+        return JsonResponse({'success': 'fail', 'msg': '验证码错误'})
 
 # project 列表页面数据查询
 def ProjectList(request):
