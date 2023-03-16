@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.urls import path,include # 从 django.urls 引入 include 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
+    path("src_api/", include("app_project.urls")),
 ]

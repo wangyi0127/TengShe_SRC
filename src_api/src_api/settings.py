@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'srcmodel',               # 添加此项
-    'srcmodel.apps.SrcConfig',
-    # 'srcmodel.apps.UserFormConfig',
+    # 'app_project',               # 添加此项
+    'app_project.apps.SrcConfig',
+    # 'app_project.apps.UserFormConfig',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True 
 
 ROOT_URLCONF = 'src_api.urls'
 

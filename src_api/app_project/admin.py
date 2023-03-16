@@ -1,6 +1,6 @@
 from django.contrib import admin
-from srcmodel.models import *
-from srcmodel.forms import UserModelForm
+from app_project.models import *
+from app_project.forms import UserModelForm
  
 # Register your models here.
 

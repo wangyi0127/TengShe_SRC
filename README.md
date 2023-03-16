@@ -8,9 +8,9 @@
 
 python manage.py migrate   // 创建表结构
 
-python manage.py makemigrations srcmodel  // 让 Django 知道我们在我们的模型有一些变更
+python manage.py makemigrations app_project  // 让 Django 知道我们在我们的模型有一些变更
 
-python manage.py migrate srcmodel   // 创建表结构
+python manage.py migrate app_project   // 创建表结构
 
 运行：
 python manage.py runserver 0.0.0.0:8100
