@@ -3,4 +3,6 @@ asgiref==3.6.0
 sqlparse==0.4.3 
 tzdata==2022.7
 pymysql==1.0.2
-django-cors-headers==3.0.2
+django-cors-headers==3.13.0
+djangorestframework==3.13.1 
+djangorestframework-simplejwt==5.1.0

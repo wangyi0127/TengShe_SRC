@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +42,11 @@ INSTALLED_APPS = [
     # 'app_project',               # 添加此项
     'app_project.apps.SrcConfig',
     # 'app_project.apps.UserFormConfig',
-    'corsheaders' # 跨域
+    'app_user',
+    'corsheaders', # 跨域
+    # ...jwt
+    'rest_framework',            # add
+    'rest_framework_simplejwt',     # add    
 ]
 
 MIDDLEWARE = [
@@ -175,3 +180,10 @@ STATIC_URL = '/static/' # 别名
 STATICFILES_DIRS = [ 
     os.path.join(BASE_DIR, "statics"), 
 ]
+
+# JWT配置
+REST_FRAMEWORK = {                  # add
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
