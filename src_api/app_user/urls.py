@@ -1,12 +1,14 @@
 from django.urls import path,re_path,include 
-from app_user import views 
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView, TokenObtainPairView
-
-
-urlpatterns = [ 
-    path('login/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('login/', views.Login, name="login"),
-    
-] 
+from app_user.auth import MyTokenObtainPairView
+from app_user.views import ListView
+from app_user import views
+# jwt内部实现的登陆视图
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+ 
+urlpatterns =[
+    # --------------------simplejwt--------------------------
+    path(r'lg', TokenObtainPairView.as_view(), name="obtain_token"),
+    path(r'token', MyTokenObtainPairView.as_view(),name="login"),  # 自定义用户表返回token
+    path(r'list',ListView.as_view(),name="list"),
+    path(r'login',views.login,name="nologin"),
+]

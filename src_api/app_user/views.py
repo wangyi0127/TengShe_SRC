@@ -1,27 +1,29 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
-from app_project.models import User
-from django.contrib.auth.hashers import check_password
-
-# login
-def Login(request):
-    if request.method == "GET":
-        return JsonResponse(
-            {'success': 'fail', 'msg': 'HTTP方法异常'},
-        )
-    request.session['CheckCode'] = '123456'
-    email = request.POST.get("username")
-    password = request.POST.get("pwd")
-    valid_num = request.POST.get("code")
-    CheckCode = request.session.get("CheckCode")
-    if CheckCode.upper() == valid_num.upper():
-        user_obj = User.objects.get(email=email)
-        if check_password(password, user_obj.password):
-            return JsonResponse({'success': 'fail', 'msg': user_obj.username})
-        else:
-            return JsonResponse({'success': 'fail', 'msg': '用户名或密码错误'})
-    else:
-        return JsonResponse({'success': 'fail', 'msg': '验证码错误'})
+from django.http import  HttpResponse,JsonResponse
+from rest_framework.views import Response
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework_simplejwt import authentication
+ 
+# Create your views here.
+#  需要token才可以访问的视图
+permission_classes = [permissions.IsAuthenticated]
+authentication_classes = (authentication.JWTAuthentication,)
+# -----------------------------simplejwt-----------------------------
+##  不需要携带token就能访问接口
+def ListShops(requests):
+    return HttpResponse("this is shop list")
+def login(requests):
+    return HttpResponse("nologin")
+ 
+# 需要携带token才可以访问的视图 
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MDcwMzg1LCJpYXQiOjE2NzkwNjk3ODUsImp0aSI6ImVjYTQxMDQ5ZmE2NzRkNDRiZDY3M2M2ZGEwMzMxN2U3IiwidXNlcl9pZCI6MX0.vF4jFSwP8QCQ1oO4igpNcw0lKmV1f6kbmTqdy5NFJiM
+class ListView(APIView):
+    #  需要token才可以访问的视图
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (authentication.JWTAuthentication,)
+ 
+    def get(self, request, *args, **kwargs):
+        return Response('Get OK')
+ 
+    def post(self, request, *args, **kwargs):
+        return Response('Post OK')

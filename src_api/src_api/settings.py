@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import datetime
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -176,14 +177,35 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTH_USER_MODEL = "app_project.User"
+
 STATIC_URL = '/static/' # 别名 
 STATICFILES_DIRS = [ 
     os.path.join(BASE_DIR, "statics"), 
 ]
 
 # JWT配置
-REST_FRAMEWORK = {                  # add
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+# --------------------simplejwt---------------------
+REST_FRAMEWORK = {
+   # 设置所有接口都需要被验证
+  'DEFAULT_PERMISSION_CLASSES': (
+      # 设置所有接口都需要被验证
+       'rest_framework.permissions.IsAuthenticated',  # 默认权限为验证用户
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+  ),
+}
+ 
+# 设置token的有效时长
+SIMPLE_JWT={
+    # token有效时长
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=10),
+    # token刷新后的有效时间
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
+JWT_AUTH = {
+    # token有效期
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 设置名称 保证前后端的对应的Token变量名相同
+     'JWT_AUTH_HEADER_PREFIX': '',  # Authorization前缀不配置默认为‘JWT’
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'apps.users.utils.jwt_response_payload_handler',
 }
