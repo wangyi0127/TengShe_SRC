@@ -5,9 +5,7 @@ from rest_framework import permissions
 from rest_framework_simplejwt import authentication
  
 # Create your views here.
-#  需要token才可以访问的视图
-permission_classes = [permissions.IsAuthenticated]
-authentication_classes = (authentication.JWTAuthentication,)
+
 # -----------------------------simplejwt-----------------------------
 ##  不需要携带token就能访问接口
 def ListShops(requests):

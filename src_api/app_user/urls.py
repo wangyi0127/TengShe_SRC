@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 urlpatterns =[
     # --------------------simplejwt--------------------------
     path(r'lg', TokenObtainPairView.as_view(), name="obtain_token"),
-    path(r'token', MyTokenObtainPairView.as_view(),name="login"),  # 自定义用户表返回token
+    path(r'getToken', MyTokenObtainPairView.as_view(),name="token"),  # 自定义用户表返回token
     path(r'list',ListView.as_view(),name="list"),
-    path(r'login',views.login,name="nologin"),
+    path(r'login',views.login,name="login"),
 ]
